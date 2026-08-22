@@ -1,0 +1,45 @@
+mqtt:
+  enabled: false
+
+go2rtc:
+  streams:
+    baby_room:
+      - exec:rpicam-vid -t 0 --inline --nopreview --width 640 --height 480 --framerate 15 --codec h264 --libav-format mpegts -o -
+
+cameras:
+  baby_room:
+    ffmpeg:
+      inputs:
+        - path: rtsp://camIP:port/baby_room
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: false
+      width: 640
+      height: 480
+      fps: 15
+    record:
+      enabled: true
+      retain:
+        days: 7
+    motion:
+      enabled: true
+
+  phone_backup:
+    ffmpeg:
+      inputs:
+        - path: http://backup_cam_ip:port/video
+          roles:
+            - detect
+            - record
+    detect:
+      enabled: false
+    record:
+      enabled: true
+    motion:
+      enabled: true
+
+detectors:
+  cpu:
+    type: cpu
