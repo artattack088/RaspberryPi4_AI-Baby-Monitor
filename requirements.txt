@@ -1,0 +1,38 @@
+# --- API / Web server ---
+fastapi
+uvicorn[standard]
+python-multipart          # required by FastAPI's OAuth2PasswordRequestForm
+pydantic
+email-validator            # required for pydantic EmailStr
+
+# --- Database ---
+sqlalchemy
+
+# --- Auth / Security ---
+passlib[bcrypt]
+python-jose[cryptography]
+
+# --- Computer Vision / ML ---
+opencv-python
+numpy
+ultralytics                # YOLO model wrapper, used for .tflite inference
+tflite-runtime              # lightweight TFLite interpreter (Raspberry Pi friendly)
+Pillow
+
+# --- Audio ---
+librosa
+sounddevice
+soundfile                  # librosa dependency for audio I/O
+matplotlib
+
+# --- Sensor hardware (I2C / BME280) ---
+smbus2
+RPi.bme280
+
+# --- Misc ---
+requests
+
+# --- NOT pip-installable ---
+# Frigate and go2rtc (camera ingestion/recording, see config.yml) run as
+# separate services (Docker recommended) — install them independently.
+# See README.md > Software Prerequisites.
